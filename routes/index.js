@@ -13,9 +13,9 @@ router.get('/', function (req, res, next) {
   // res.query = temp
   console.log(req.query)
   let token = 'xiaozhong'
-  let $signature = res.query.signature
-  let $timestamp = res.query.timestamp
-  let $nonce = res.query.nonce
+  let $signature = req.query.signature
+  let $timestamp = req.query.timestamp
+  let $nonce = req.query.nonce
   let $echostr = req.query.echostr
   let array = [token, $timestamp, $nonce]
   console.log(array)
