@@ -4,6 +4,7 @@ var crypto =  require('crypto')
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
+  console.log(req.query)
   let token = 'xiaozhong'
   let $signature = res.query.signature
   let $timestamp  = res.query.timestamp
