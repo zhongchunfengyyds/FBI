@@ -1,25 +1,33 @@
 var express = require('express');
 var router = express.Router();
-var crypto =  require('crypto')
+const sha1 = require("sha1");
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
+  // let temp = {
+  //   signature: 'cd96fc93b461ff33f18db433c83db4e3eb40e179',
+  //   echostr: '8063470099593260799',
+  //   timestamp: '1578453631',
+  //   nonce: '610621653'
+  // }
+  // res.query = temp
   console.log(req.query)
   let token = 'xiaozhong'
   let $signature = res.query.signature
-  let $timestamp  = res.query.timestamp
+  let $timestamp = res.query.timestamp
   let $nonce = res.query.nonce
   let $echostr = req.query.echostr
   let array = [token, $timestamp, $nonce]
   console.log(array)
   array.sort()
-  console.log(array)
+  // console.log(array)
   let tempStr = array.join('')
-  const hashCode = crypto.createHash('sha1'); //创建加密类型 
-  var resultCode = hashCode.update(tempStr,'utf8').digest('hex'); //对传入的字符串进行加密
-  if(resultCode === $signature){
+  // console.log(tempStr)
+  var resultCode = sha1(tempStr) //对传入的字符串进行加密
+  console.log($echostr)
+  if (resultCode === $signature) {
     res.send($echostr);
-  }else{
+  } else {
     res.send('mismatch');
   }
 })
