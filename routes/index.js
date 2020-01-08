@@ -1,6 +1,11 @@
 var express = require('express');
-var router = express.Router();
-const sha1 = require("sha1");
+var router = express.Router()
+const sha1 = require("sha1")
+// 获取所有的请求
+const wxApi = require('../util/getUrl')
+const wxRequest = new wxApi()
+wxRequest.reqAccessToken()
+
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -24,6 +29,7 @@ router.get('/', function (req, res, next) {
   let tempStr = array.join('')
   // console.log(tempStr)
   var resultCode = sha1(tempStr) //对传入的字符串进行加密
+  // 获取AccessToken
   console.log($echostr)
   if (resultCode === $signature) {
     res.send($echostr);
