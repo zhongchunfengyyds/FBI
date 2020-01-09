@@ -5,12 +5,12 @@ function message(body, query) {
   let now = new Date().getTime()
   let reply = ''
   msgtype = body.msgtype[0]
-  if (body.msgtype[0] === 'text') {
+  if (msgtype === 'text') {
     reply = '<xml>' +
-    '<ToUserName><![CDATA['+ body.fromusername +']]></ToUserName>' +
-    '<FromUserName><![CDATA['+ message.tousername +']]></FromUserName>' +
+    '<ToUserName><![CDATA['+ body.fromusername[0] +']]></ToUserName>' +
+    '<FromUserName><![CDATA['+ message.tousername[0] +']]></FromUserName>' +
     '<CreateTime>'+ now +'</CreateTime>' +
-    '<MsgType><![CDATA['+ message.MsgType +']]></MsgType>' +
+    '<MsgType><![CDATA['+ msgtype +']]></MsgType>' +
     '<Content><![CDATA[收到你的信息]]></Content>' +
     '</xml>'
   }
