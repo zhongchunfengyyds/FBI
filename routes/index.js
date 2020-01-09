@@ -3,6 +3,8 @@ var router = express.Router()
 const rawBody = require('raw-body')
 
 const sha1 = require("sha1")
+// 消息类型
+const message = require('../util/message')
 // 获取所有的请求
 const wxApi = require('../util/getUrl')
 const wxRequest = new wxApi()
@@ -44,6 +46,8 @@ router.get('/', function (req, res, next) {
 })
 
 router.post('/',function(req, res, next){
-  console.log(req.query, req.body) 
+  console.log(req.query, req.body)
+  let result = message(req.body.xml)
+  res.send(result)
 })
 module.exports = router;
