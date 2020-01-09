@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router()
-const rawBody = require('raw-body')
 
 const sha1 = require("sha1")
 // 消息类型
