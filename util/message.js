@@ -8,7 +8,7 @@ function message(body, query) {
   if (msgtype === 'text') {
     reply = '<xml>' +
     '<ToUserName><![CDATA['+ body.fromusername[0] +']]></ToUserName>' +
-    '<FromUserName><![CDATA['+ message.tousername[0] +']]></FromUserName>' +
+    '<FromUserName><![CDATA['+ body.tousername[0] +']]></FromUserName>' +
     '<CreateTime>'+ now +'</CreateTime>' +
     '<MsgType><![CDATA['+ msgtype +']]></MsgType>' +
     '<Content><![CDATA[收到你的信息]]></Content>' +

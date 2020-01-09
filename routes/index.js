@@ -38,7 +38,7 @@ router.get('/', function (req, res, next) {
 
 router.post('/',function(req, res, next){
   console.log(req.query, req.body)
-  let result = message(req.body.xml,req.query)
+  let result = message(req.body.xml)
   console.log('回复消息')
   console.log(result)
   res.send(result)
