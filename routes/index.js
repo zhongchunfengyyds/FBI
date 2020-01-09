@@ -13,13 +13,6 @@ wxRequest.gexinghuaMenu()
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  // let temp = {
-  //   signature: 'cd96fc93b461ff33f18db433c83db4e3eb40e179',
-  //   echostr: '8063470099593260799',
-  //   timestamp: '1578453631',
-  //   nonce: '610621653'
-  // }
-  // res.query = temp
   console.log(req.query)
   let token = 'xiaozhong'
   let $signature = req.query.signature
