@@ -4,7 +4,10 @@ const sha1 = require("sha1")
 // 获取所有的请求
 const wxApi = require('../util/getUrl')
 const wxRequest = new wxApi()
+// 获取accessToken
 wxRequest.reqAccessToken()
+// 创建自定义菜单
+wxRequest.addMenu()
 
 
 /* GET home page. */
