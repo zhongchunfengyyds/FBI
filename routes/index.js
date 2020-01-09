@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router()
+const rawBody = require('raw-body')
+
 const sha1 = require("sha1")
 // 获取所有的请求
 const wxApi = require('../util/getUrl')
@@ -42,6 +44,6 @@ router.get('/', function (req, res, next) {
 })
 
 router.post('/',function(req, res, next){
-  console.log(req)
+  console.log(req.query, req.body) 
 })
 module.exports = router;
