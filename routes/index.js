@@ -11,8 +11,7 @@ const wxRequest = new wxApi()
 // 获取accessToken
 wxRequest.reqAccessToken()
 // 创建自定义菜单
-wxRequest.addMenu()
-
+wxRequest.gexinghuaMenu()
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
