@@ -1,11 +1,18 @@
 // 消息推送 消息聊天
 const xml2js = require('xml2js');
-function message (data) {
-    if (data.MsgType === 'text') {
-        let obj = {name: "Super", Surname: "Man", age: 23};
- 
+
+function message(body, query) {
+    if (body.MsgType[0] === 'text') {
         let builder = new xml2js.Builder();
-        return builder.buildObject(obj);
+        let xml = {
+            ToUserName: query.openid,
+            FromUserName: body.fromusername,
+            CreateTime: new Date().getTime(),
+            MsgType: 'text',
+            Content: body.content
+        };
+        return builder.buildObject(xml);
     }
+
 }
 module.exports = message
