@@ -1,7 +1,7 @@
 // 消息推送 消息聊天
 const xml2js = require('xml2js');
 
-function message(body, query) {
+function message(body) {
   let now = new Date().getTime()
   let reply = ''
   msgtype = body.msgtype[0]
