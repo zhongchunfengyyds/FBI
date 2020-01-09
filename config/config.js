@@ -7,8 +7,8 @@ const accessTokenFile = path.join(__dirname, '../util/accessToken.txt')
 console.log(accessTokenFile)
 // 公众号基本配置
 const config = {
-  AppId: 'wx068f4d9ce25eb4dc',
-  AppSecret: 'a5c35526032dbc400e22675a291f5df3',
+  AppId: 'wxa9c7b72fc4aa158d',
+  AppSecret: 'f6b6be31a68ffa3240529e3ef93069c0',
   //获取access_token
   readAccessToken () {
     let result = ''

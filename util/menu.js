@@ -1,5 +1,5 @@
 // 自定义菜单
-let bottomMenu = {
+const bottomMenu = {
   "button": [
       {
           "name": "扫码", 
@@ -45,18 +45,7 @@ let bottomMenu = {
           "name": "发送位置", 
           "type": "location_select", 
           "key": "rselfmenu_2_0"
-      },
-      {
-         "type": "media_id", 
-         "name": "图片", 
-         "media_id": "MEDIA_ID1"
-      }, 
-      {
-         "type": "view_limited", 
-         "name": "图文消息", 
-         "media_id": "MEDIA_ID2"
       }
   ]
 }
-
 module.exports = bottomMenu
