@@ -24,6 +24,13 @@ class wxApi {
     })
   }
 
+  // token过期重新获取
+  async getToken (func) {
+    this.reqAccessToken()
+    let token = await config.readAccessToken()
+    this.func(token)
+  }
+
   // 添加自定义菜单接口
   async addMenu () {
     // 获取token
@@ -38,7 +45,7 @@ class wxApi {
         "content-type": "application/json",
       },
       json: true,
-      body: menuBody
+      body: menuBody.menuTest
     }, (err, res, body) => {
       console.warn('--------------------------------')
       if (!err && body.errcode === 0) {
@@ -56,6 +63,52 @@ class wxApi {
     request(url, (err, res, body) => {
       if (!err && body.errcode === 0) {
         console.warn('删除自定义菜单成功')
+      } else {
+        console.warn(body)
+      }
+    })
+  }
+
+  // 创建个性化菜单
+  async gexinghuaMenu (data) {
+    let token = ''
+    if (data) {
+      token = data
+    } else {
+      token = await config.readAccessToken()
+    }
+    let url = 'cgi-bin/menu/addconditional?access_token=' + token
+    console.warn(url)
+     // post请求创建个性化底部菜单
+     console.log('更改个性化菜单')
+     request({
+      url: weixinUrl + url,
+      method: 'POST',
+      headers: {//设置请求头
+        "content-type": "application/json",
+      },
+      json: true,
+      body: menuBody.gexinghua
+    }, (err, res, body) => {
+      console.warn('--------------------------------')
+      if (body.errcode === 42001) {
+        this.getToken(gexinghuaMenu)
+      }
+      if (!err && body.menuid) {
+        console.warn('更改菜单成功')
+      } else {
+        console.warn(body)
+      }
+    })
+  }
+
+  // 删除个性化菜单
+  async delgexinghuaMenu () {
+    let token = await config.readAccessToken()
+    let url = 'cgi-bin/menu/delconditional?access_token=' + token
+    request(url, (err, res, body) => {
+      if (!err && body.errcode === 0) {
+        console.warn('删除个性化菜单成功')
       } else {
         console.warn(body)
       }
