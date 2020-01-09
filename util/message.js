@@ -2,17 +2,18 @@
 const xml2js = require('xml2js');
 
 function message(body, query) {
-    if (body.msgtype[0] === 'text') {
-        let builder = new xml2js.Builder();
-        let xml = {
-            ToUserName: query.openid,
-            FromUserName: body.fromusername,
-            CreateTime: new Date().getTime(),
-            MsgType: 'text',
-            Content: body.content
-        };
-        return builder.buildObject(xml);
-    }
-
+  let now = new Date().getTime()
+  let reply = ''
+  msgtype = body.msgtype[0]
+  if (body.msgtype[0] === 'text') {
+    reply = '<xml>' +
+    '<ToUserName><![CDATA['+ body.fromusername +']]></ToUserName>' +
+    '<FromUserName><![CDATA['+ message.tousername +']]></FromUserName>' +
+    '<CreateTime>'+ now +'</CreateTime>' +
+    '<MsgType><![CDATA['+ message.MsgType +']]></MsgType>' +
+    '<Content><![CDATA[收到你的信息]]></Content>' +
+    '</xml>'
+  }
+  return reply
 }
 module.exports = message
