@@ -9,8 +9,12 @@ const wxApi = require('../util/getUrl')
 const wxRequest = new wxApi()
 // 获取accessToken
 wxRequest.reqAccessToken()
+// 删除个性化菜单
+// wxRequest.delgexinghuaMenu()
 // 创建自定义菜单
-wxRequest.gexinghuaMenu()
+wxRequest.addMenu()
+// 创建个性化菜单
+// wxRequest.gexinghuaMenu()
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
