@@ -13,8 +13,8 @@ let fs = require("fs");
  * Get port from environment and store in Express.
  */
 const httpsOption = {
-  key : fs.readFileSync("./https/3379872_xiaozhong.online.key"),
-  cert: fs.readFileSync("./https/3379872_xiaozhong.online.pem")
+  key : fs.readFileSync("../https/3379872_xiaozhong.online.key"),
+  cert: fs.readFileSync("../https/3379872_xiaozhong.online.pem")
 }
 // https.createServer(httpsOption, app).listen(443);
 // var port = normalizePort(process.env.PORT || '443');
