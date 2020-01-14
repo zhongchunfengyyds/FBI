@@ -7,25 +7,30 @@
 var app = require('../app');
 var debug = require('debug')('fbi:server');
 var http = require('http');
-
+let https = require("https");
+let fs = require("fs");
 /**
  * Get port from environment and store in Express.
  */
-
-var port = normalizePort(process.env.PORT || '443');
-app.set('port', port);
+const httpsOption = {
+  key : fs.readFileSync("./https/3379872_xiaozhong.online.key"),
+  cert: fs.readFileSync("./https/3379872_xiaozhong.online.pem")
+}
+// https.createServer(httpsOption, app).listen(443);
+// var port = normalizePort(process.env.PORT || '443');
+// app.set('port', port);
 
 /**
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+var server =https.createServer(httpsOption, app).listen(443);
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
+// server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
