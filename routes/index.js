@@ -134,6 +134,7 @@ router.get('/jssdk', async(req, res) => {
     noncestr,
     signature
   }
+  console.log(resObj)
   // 接口值返回页面
   res.send({
     code: 200,
