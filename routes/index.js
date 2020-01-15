@@ -91,7 +91,7 @@ router.get('/aouth', async(req, res) => {
       console.log('4----------------------------------------------------')
       console.warn(res)
       res.send(res)
-      res.
+      // res.
     }
   })
 })
