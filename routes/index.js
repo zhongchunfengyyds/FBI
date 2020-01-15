@@ -129,7 +129,7 @@ router.get('/jssdk', async(req, res) => {
   // 时间戳
   // -----------------------
   // 加密
-  let timestamp = new Date().getTime()
+  let timestamp = (new Date().getTime() / 1000) + ''
   let array = [reqUrl, timestamp, noncestr, jsapi_ticket]
   array.sort()
   // 签名
