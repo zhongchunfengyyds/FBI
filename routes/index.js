@@ -108,10 +108,11 @@ router.get('/jssdk', async(req, res) => {
   let reqUrl = req.query.url
   console.log(reqUrl)
   if (!reqUrl) {
-    res.send({
+    res.render({
       code: 401,
       msg: 'url不能为空'
     })
+    return
   }
   // 随机字符串
   let noncestr='Wm3WZYTPz0wzccnW'
@@ -136,7 +137,7 @@ router.get('/jssdk', async(req, res) => {
   }
   console.log(resObj)
   // 接口值返回页面
-  res.send({
+  res.render({
     code: 200,
     data: resObj
   })
