@@ -131,9 +131,10 @@ router.get('/jssdk', async(req, res) => {
   // 加密
   let timestamp = parseInt((new Date().getTime() / 1000)) + ''
   let array = [reqUrl, timestamp, noncestr, jsapi_ticket]
-  array.sort()
+  let string1 = `jsapi_ticket=${jsapi_ticket}&noncestr=${noncestr}&timestamp=${timestamp}&url=${reqUrl}`
+  console.log(string1)
   // 签名
-  let signature = sha1(array.join(''))
+  let signature = sha1(string1)
   // appid
   let appId = config.AppId
   let resObj = {
