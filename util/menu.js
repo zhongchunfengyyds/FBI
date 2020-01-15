@@ -24,7 +24,7 @@ const menuTest = {
             {
                 "type": "view", 
                 "name": "程二狗online", 
-                "url": "http://www.xiaozhong.online/"
+                "url": "https://www.xiaozhong.online/aouth"
             }, 
             {
                 "type": "click", 
