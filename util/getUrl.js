@@ -105,7 +105,6 @@ class wxApi {
       }
     })
   }
-
   // 删除自定义菜单接口
   async delMenu() {
     let token = await config.readAccessToken()
@@ -114,6 +113,7 @@ class wxApi {
       if (!err && body.errcode === 0) {
         console.warn('删除自定义菜单成功')
       } else {
+        console.warn('---------')
         console.warn(body)
       }
     })

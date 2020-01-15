@@ -12,6 +12,8 @@ const wxRequest = new wxApi()
 wxRequest.reqAccessToken()
 // 删除个性化菜单
 // wxRequest.delgexinghuaMenu()
+// 删除自定义菜单
+// wxRequest.delMenu()
 // 创建自定义菜单
 wxRequest.addMenu()
 // 创建个性化菜单
