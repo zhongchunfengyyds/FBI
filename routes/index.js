@@ -15,7 +15,7 @@ wxRequest.reqAccessToken()
 // 删除自定义菜单
 // wxRequest.delMenu()
 // 创建自定义菜单
-wxRequest.addMenu()
+// wxRequest.addMenu()
 // 创建个性化菜单
 // wxRequest.gexinghuaMenu()
 
@@ -53,6 +53,9 @@ router.post('/',function(req, res, next){
 
 // 网页授权
 router.get('/aouth', async(req, res) => {
+  console.log('1------------------------------------')
+  console.log(req.query)
+  console.warn(wxRequest.weixinUrl)
   // 获取网页授权的code
   if (!req.query.code) {
     let redirect_url='http://www.xiaozhong.online/'
@@ -60,6 +63,7 @@ router.get('/aouth', async(req, res) => {
   }
 
   // 获取用户accessToken 和 apenid
+  console.log('2---------------------------------------')
   let code = req.query.code 
   let url =  `https://api.weixin.qq.com/sns/oauth2/access_token?appid=${config.AppId}&secret=${config.AppSecret}&code=${code}&grant_type=authorization_code`
   let userObj = null
@@ -71,6 +75,7 @@ router.get('/aouth', async(req, res) => {
   //   "openid":"OPENID",
   //   "scope":"SCOPE" 
   // }
+  console.log('3-------------------------------------')
   console.log(resData)
   // resData = JSON.parse(resData)
   if (resData.access_token) {
@@ -80,6 +85,7 @@ router.get('/aouth', async(req, res) => {
   let infoUrl = `https://api.weixin.qq.com/sns/userinfo?access_token=${userObj.access_token}&openid=${userObj.openid}&lang=zh_CN`
   wxRequest.requestApi(infoUrl, 'get').then(res => {
     if (res) {
+      console.log('4----------------------------------------------------')
       console.warn(res)
       res.send(res)
     }
