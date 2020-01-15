@@ -90,8 +90,8 @@ router.get('/aouth', async(req, res) => {
   wxRequest.requestApi(infoUrl, 'get').then(res => {
     if (res) {
       console.log('4----------------------------------------------------')
-      console.warn(res)
-      res.send(res)
+      console.warn(res.res.body)
+      res.send(res.res.body)
       // res
     }
   })
