@@ -132,6 +132,7 @@ router.get('/jssdk', async(req, res) => {
   let timestamp = parseInt((new Date().getTime() / 1000)) + ''
   let array = [reqUrl, timestamp, noncestr, jsapi_ticket]
   let string1 = `jsapi_ticket=${jsapi_ticket}&noncestr=${noncestr}&timestamp=${timestamp}&url=${reqUrl}`
+  console.log('stirng1--------------------------------')
   console.log(string1)
   // 签名
   let signature = sha1(string1)
