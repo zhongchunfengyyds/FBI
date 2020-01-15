@@ -106,6 +106,7 @@ router.get('/aouth', async (req, res) => {
 router.get('/jssdk', async(req, res) => {
   // 获取到的url
   let reqUrl = req.query.url
+  console.log('接收到url------')
   console.log(reqUrl)
   if (!reqUrl) {
     res.send({
