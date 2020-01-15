@@ -19,6 +19,7 @@ const config = {
         } else {
           // data是base64
           result = data.toString()
+          console.warn(result)
           reolve(result)
         }
       })

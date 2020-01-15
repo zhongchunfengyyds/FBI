@@ -74,9 +74,14 @@ class wxApi {
   }
 
   // 添加自定义菜单接口
-  async addMenu() {
+  async addMenu(data) {
     // 获取token
-    let token = await config.readAccessToken()
+    let token = ''
+    if (data) {
+      token = data
+    } else {
+      token = await config.readAccessToken()
+    }
     let url = 'cgi-bin/menu/create?access_token=' + token
     console.warn(url)
     // post请求创建自定义底部菜单
@@ -90,6 +95,9 @@ class wxApi {
       body: menuBody.menuTest
     }, (err, res, body) => {
       console.warn('--------------------------------')
+      if (body.errcode === 42001) {
+        this.getToken(this.addMenu)
+      }
       if (!err && body.errcode === 0) {
         console.warn('更改菜单成功')
       } else {
