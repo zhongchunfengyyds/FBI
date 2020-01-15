@@ -202,7 +202,6 @@ class wxApi {
     }
     let fectUrl = weixinUrl + `cgi-bin/ticket/getticket?access_token=${token}&type=jsapi`
     let resData = await this.requestApi(fectUrl, 'get')
-    console.log(resData.res.body)
     resData = JSON.parse(resData.res.body)
     if (resData.errcode == 0) {
       console.log('获取签名成功')

@@ -115,6 +115,12 @@ router.get('/jssdk', async(req, res) => {
     })
     return
   }
+  let index = reqUrl.indexOf('#')
+  if (index > 0) {
+    reqUrl = reqUrl.substr(0, index)
+    console.log('截取完#号--------------------------')
+    console.log(reqUrl)
+  }
   // 随机字符串
   let noncestr='Wm3WZYTPz0wzccnW'
   // js-sdk令牌
