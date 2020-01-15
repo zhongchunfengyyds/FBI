@@ -64,6 +64,8 @@ router.get('/aouth', async(req, res) => {
   // 获取用户accessToken 和 apenid
   console.log('2---------------------------------------')
   let code = req.query.code 
+  console.log(code)
+
   let url =  `https://api.weixin.qq.com/sns/oauth2/access_token?appid=${config.AppId}&secret=${config.AppSecret}&code=${code}&grant_type=authorization_code`
   let userObj = null
   let resData = await wxRequest.requestApi(url, 'get')
@@ -75,10 +77,10 @@ router.get('/aouth', async(req, res) => {
   //   "scope":"SCOPE" 
   // }
   console.log('3-------------------------------------')
-  console.log(resData)
+  console.log(resData.res.body)
   // resData = JSON.parse(resData)
   if (resData.access_token) {
-    userObj = resData
+    userObj = resData.res.body
   }
   // 拉取用户信息
   let infoUrl = `https://api.weixin.qq.com/sns/userinfo?access_token=${userObj.access_token}&openid=${userObj.openid}&lang=zh_CN`
