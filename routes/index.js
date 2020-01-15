@@ -8,6 +8,7 @@ const message = require('../util/message')
 // 获取所有的请求
 const wxApi = require('../util/getUrl')
 const wxRequest = new wxApi()
+
 // 获取accessToken
 wxRequest.reqAccessToken()
 // 删除个性化菜单
@@ -95,6 +96,45 @@ router.get('/aouth', async (req, res) => {
       res.redirect('http://www.xiaozhong.online?' + res.res.body)
       // res
     }
+  })
+})
+
+// js-sdk 接口验证
+router.get('/jssdk', async(req, res) => {
+  // 获取到的url
+  let reqUrl = req.query.url
+  if (!reqUrl) {
+    res.send({
+      code: 401,
+      msg: 'url不能为空'
+    })
+  }
+  // 随机字符串
+  let noncestr='Wm3WZYTPz0wzccnW'
+  // js-sdk令牌
+  let jsapi_ticket = await wxRequest.getsignature()
+  console.log(jsapi_ticket)
+  // 时间戳
+  // -----------------------
+  // 加密
+  let timestamp = new Date().getTime()
+  let array = [reqUrl, timestamp, noncestr, jsapi_ticket]
+  console.log(array)
+  array.sort()
+  // 签名
+  let signature = sha1(array.join(''))
+  // appid
+  let appId = config.AppId
+  let resObj = {
+    appId,
+    timestamp,
+    nonceStr,
+    signature
+  }
+  // 接口值返回页面
+  res.send({
+    code: 200,
+    data: resObj
   })
 })
 module.exports = router;

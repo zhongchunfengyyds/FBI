@@ -190,6 +190,25 @@ class wxApi {
         }
       })
   }
+  // 获取签名然后调用js-sdk
+  async getsignature (data) {
+    console.log('---------------------------')
+    console.log('这是是获取js-sdk签名')
+    let token = ''
+    if (data) {
+      token = data
+    } else {
+      token = await config.readAccessToken()
+    }
+    let fectUrl = weixinUrl + `cgi-bin/ticket/getticket?access_token=${token}&type=jsapi`
+    let resData = await this.requestApi(fectUrl, 'get')
+    console.log(resData.res.body)
+    resData = JSON.parse(resData.res.body)
+    if (resData.errcode == 0) {
+      console.log('获取签名成功')
+      return resData.ticket
+    }
+  }
 }
 
 module.exports = wxApi
