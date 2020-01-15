@@ -90,8 +90,10 @@ router.get('/aouth', async (req, res) => {
   wxRequest.requestApi(infoUrl, 'get').then(res => {
     if (res) {
       console.log('4----------------------------------------------------')
-      console.warn('http://www.xiaozhong.online?' + res.res.body)
-      res.redirect('http://www.xiaozhong.online?' + res.res.body)
+      let data = JSON.parse(res.res.body)
+      console.log(data)
+      console.warn('http://www.xiaozhong.online?openid=' + data.openid +'&nickname = '+data.nickname)
+      res.redirect('http://www.xiaozhong.online?openid=' + data.openid +'&nickname = '+data.nickname)
       // res
     }
   })
