@@ -106,6 +106,7 @@ router.get('/aouth', async (req, res) => {
 router.get('/jssdk', async(req, res) => {
   // 获取到的url
   let reqUrl = req.query.url
+  console.log(reqUrl)
   if (!reqUrl) {
     res.send({
       code: 401,
@@ -122,7 +123,6 @@ router.get('/jssdk', async(req, res) => {
   // 加密
   let timestamp = new Date().getTime()
   let array = [reqUrl, timestamp, noncestr, jsapi_ticket]
-  console.log(array)
   array.sort()
   // 签名
   let signature = sha1(array.join(''))
@@ -131,7 +131,7 @@ router.get('/jssdk', async(req, res) => {
   let resObj = {
     appId,
     timestamp,
-    nonceStr,
+    noncestr,
     signature
   }
   // 接口值返回页面
