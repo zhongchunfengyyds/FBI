@@ -93,8 +93,8 @@ router.get('/aouth', async (req, res) => {
       console.log('4----------------------------------------------------')
       let data = JSON.parse(res.res.body)
       console.log(data)
-      console.warn('http://www.xiaozhong.online?openid=' + data.openid +'&nickname = '+data.nickname)
-      res.redirect('http://www.xiaozhong.online?openid=' + data.openid +'&nickname = '+data.nickname)
+      console.warn('http://www.xiaozhong.online?openid=' + data.openid)
+      res.redirect('http://www.xiaozhong.online?openid=' + data.openid)
       // res
     }
   })
