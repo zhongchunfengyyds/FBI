@@ -61,6 +61,7 @@ router.get('/aouth', async (req, res) => {
     console.warn('重定向的地址')
     console.warn(redirect_url)
     res.redirect(`https://open.weixin.qq.com/connect/oauth2/authorize?appid=${config.AppId}&redirect_uri=${redirect_url}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`)
+    return
   }
 
   // 获取用户accessToken 和 apenid
