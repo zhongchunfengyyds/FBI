@@ -54,8 +54,9 @@ router.get('/aouth', async(req, res) => {
   // 获取网页授权的code
   if (!req.query.code) {
     let redirect_url='http://www.xiaozhong.online/'
-    res.redirect(wxRequest + `connect/oauth2/authorize?appid=${config.AppId}&redirect_uri=${redirect_url}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`)
+    res.redirect(wxRequest.weixinUrl + `connect/oauth2/authorize?appid=${config.AppId}&redirect_uri=${redirect_url}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`)
   }
+
   // 获取用户accessToken 和 apenid
   let code = req.query.code 
   let url =  `https://api.weixin.qq.com/sns/oauth2/access_token?appid=${config.AppId}&secret=${config.AppSecret}&code=${code}&grant_type=authorization_code`
