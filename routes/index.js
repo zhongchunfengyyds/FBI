@@ -81,8 +81,9 @@ router.get('/aouth', async(req, res) => {
   console.log('3-------------------------------------')
   console.log(resData.res.body)
   // resData = JSON.parse(resData)
-  if (resData.access_token) {
-    userObj = resData.res.body
+  if (resData.res.body) {
+    userObj = JSON.parse(resData.res.body)
+    console.log(userObj)
   }
   // 拉取用户信息
   let infoUrl = `https://api.weixin.qq.com/sns/userinfo?access_token=${userObj.access_token}&openid=${userObj.openid}&lang=zh_CN`
@@ -91,7 +92,7 @@ router.get('/aouth', async(req, res) => {
       console.log('4----------------------------------------------------')
       console.warn(res)
       res.send(res)
-      // res.
+      // res
     }
   })
 })
