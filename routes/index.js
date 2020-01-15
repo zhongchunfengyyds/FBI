@@ -50,20 +50,35 @@ router.post('/',function(req, res, next){
 })
 
 // 网页授权
-router.get('/aouth', (req, res) => {
+router.get('/aouth', async(req, res) => {
   // 获取网页授权的code
   if (!req.query.code) {
-    let redirect_url=''
+    let redirect_url='http://www.xiaozhong.online/'
     res.redirect(wxRequest + `connect/oauth2/authorize?appid=${config.AppId}&redirect_uri=${redirect_url}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`)
   }
+  // 获取用户accessToken 和 apenid
   let code = req.query.code 
   let url =  `https://api.weixin.qq.com/sns/oauth2/access_token?appid=${config.AppId}&secret=${config.AppSecret}&code=${code}&grant_type=authorization_code`
-  let userToken = ''
-  wxRequest.requestApi(url, 'get').then(res => {
-    console.warn(res)
-    res = JSON.parse(res)
-    if (res.access_token) {
-      userToken = res.access_token
+  let userObj = null
+  let resData = await wxRequest.requestApi(url, 'get')
+  // { 
+  //   "access_token":"ACCESS_TOKEN",
+  //   "expires_in":7200,
+  //   "refresh_token":"REFRESH_TOKEN",
+  //   "openid":"OPENID",
+  //   "scope":"SCOPE" 
+  // }
+  console.log(resData)
+  // resData = JSON.parse(resData)
+  if (resData.access_token) {
+    userObj = resData
+  }
+  // 拉取用户信息
+  let infoUrl = `https://api.weixin.qq.com/sns/userinfo?access_token=${userObj.access_token}&openid=${userObj.openid}&lang=zh_CN`
+  wxRequest.requestApi(infoUrl, 'get').then(res => {
+    if (res) {
+      console.warn(res)
+      res.send(res)
     }
   })
 })
