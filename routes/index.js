@@ -88,14 +88,14 @@ router.get('/aouth', async (req, res) => {
   }
   // 拉取用户信息
   let infoUrl = `https://api.weixin.qq.com/sns/userinfo?access_token=${userObj.access_token}&openid=${userObj.openid}&lang=zh_CN`
-  wxRequest.requestApi(infoUrl, 'get').then(res => {
-    if (res) {
+  wxRequest.requestApi(infoUrl, 'get').then(resp => {
+    if (resp) {
       console.log('4----------------------------------------------------')
-      let data = JSON.parse(res.res.body)
+      let data = JSON.parse(resp.res.body)
       console.log(data)
       console.warn('http://www.xiaozhong.online?openid=' + data.openid)
-      // res.redirect('http://www.xiaozhong.online?openid=' + data.openid)
-      res.redirect('http://www.xiaozhong.online')
+      res.redirect('http://www.xiaozhong.online?openid=' + data.openid)
+      // res.redirect('http://www.xiaozhong.online')
       // res
     }
   })
