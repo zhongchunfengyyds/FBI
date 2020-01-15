@@ -57,7 +57,7 @@ router.get('/aouth', async(req, res) => {
   console.log(req.query)
   // 获取网页授权的code
   if (!req.query.code) {
-    let redirect_url='http://www.xiaozhong.online/'
+    let redirect_url= encodeURI('http://www.xiaozhong.online/')
     res.redirect(`https://open.weixin.qq.com/connect/oauth2/authorize?appid=${config.AppId}&redirect_uri=${redirect_url}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`)
   }
 
