@@ -43,7 +43,7 @@ router.get('/', function (req, res, next) {
   }
 })
 
-router.post('/',function(req, res, next){
+router.post('/', function (req, res, next) {
   console.log(req.query, req.body)
   let result = message(req.body.xml)
   console.log('回复消息')
@@ -52,12 +52,12 @@ router.post('/',function(req, res, next){
 })
 
 // 网页授权
-router.get('/aouth', async(req, res) => {
+router.get('/aouth', async (req, res) => {
   console.log('1------------------------------------')
   console.log(req.query)
   // 获取网页授权的code
   if (!req.query.code) {
-    let redirect_url= encodeURI('https://www.xiaozhong.online/aouth')
+    let redirect_url = encodeURI('https://www.xiaozhong.online/aouth')
     console.warn('重定向的地址')
     console.warn(redirect_url)
     res.redirect(`https://open.weixin.qq.com/connect/oauth2/authorize?appid=${config.AppId}&redirect_uri=${redirect_url}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`)
@@ -66,10 +66,10 @@ router.get('/aouth', async(req, res) => {
 
   // 获取用户accessToken 和 apenid
   console.log('2---------------------------------------')
-  let code = req.query.code 
+  let code = req.query.code
   console.log(code)
 
-  let url =  `https://api.weixin.qq.com/sns/oauth2/access_token?appid=${config.AppId}&secret=${config.AppSecret}&code=${code}&grant_type=authorization_code`
+  let url = `https://api.weixin.qq.com/sns/oauth2/access_token?appid=${config.AppId}&secret=${config.AppSecret}&code=${code}&grant_type=authorization_code`
   let userObj = null
   let resData = await wxRequest.requestApi(url, 'get')
   // { 
@@ -82,17 +82,18 @@ router.get('/aouth', async(req, res) => {
   console.log('3-------------------------------------')
   console.log(resData.res.body)
   // resData = JSON.parse(resData)
-  if (resData.access_token) {
-    userObj = resData.res.body
+  if (resData.res.body) {
+    userObj = JSON.parse(resData.res.body)
+    console.log(userObj)
   }
   // 拉取用户信息
   let infoUrl = `https://api.weixin.qq.com/sns/userinfo?access_token=${userObj.access_token}&openid=${userObj.openid}&lang=zh_CN`
   wxRequest.requestApi(infoUrl, 'get').then(res => {
     if (res) {
       console.log('4----------------------------------------------------')
-      console.warn(res)
-      res.send(res)
-      // res.
+      console.warn('http://www.xiaozhong.online?' + res.res.body)
+      res.redirect('http://www.xiaozhong.online?' + res.res.body)
+      // res
     }
   })
 })
