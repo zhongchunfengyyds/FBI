@@ -9,7 +9,7 @@ const weixinUrl = 'https://api.weixin.qq.com/'
 
 class wxApi {
   // 封装request请求
-  requestApi(url, method) {
+  requestApi(url, method, data) {
     return new Promise((resolve, reject) => {
       if (method == 'get' || method == 'GET') {
         request({
@@ -27,6 +27,26 @@ class wxApi {
               resolve(data)
             }
           })
+      } else {
+        request({
+          url: weixinUrl + url,
+          method: 'POST',
+          headers: { //设置请求头
+            "content-type": "application/json",
+          },
+          json: true,
+          body: data
+        }, (err, res, body) => {
+          if (err) {
+            throw err
+          } else {
+            let data = {
+              res,
+              body
+            }
+            resolve(data)
+          }
+        })
       }
     })
   }
@@ -136,19 +156,6 @@ class wxApi {
       arr.push(item.menuid)
     })
     return arr
-    // request({
-    //     url: url,
-    //     method: 'GET'
-    //   },
-    //   (err, res, body) => {
-    //     let data = JSON.parse(body)
-    //     data.conditionalmenu.map(item => {
-    //       arr.push(item.menuid)
-    //     })
-    //     console.log('ok')
-    //     console.log(arr)
-    //   })
-    // return 
   }
   // 删除个性化菜单
   async delgexinghuaMenu() {

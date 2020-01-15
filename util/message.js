@@ -5,6 +5,7 @@ function message(body) {
   let now = new Date().getTime()
   let reply = ''
   msgtype = body.msgtype[0]
+  // 回复普通消息
   if (msgtype === 'text') {
     reply = '<xml>' +
     '<ToUserName><![CDATA['+ body.fromusername[0] +']]></ToUserName>' +

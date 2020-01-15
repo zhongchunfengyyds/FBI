@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router()
 
+const config = require('../config/config')
 const sha1 = require("sha1")
 // 消息类型
 const message = require('../util/message')
@@ -46,5 +47,24 @@ router.post('/',function(req, res, next){
   console.log('回复消息')
   console.log(result)
   res.send(result)
+})
+
+// 网页授权
+router.get('/aouth', (req, res) => {
+  // 获取网页授权的code
+  if (!req.query.code) {
+    let redirect_url=''
+    res.redirect(wxRequest + `connect/oauth2/authorize?appid=${config.AppId}&redirect_uri=${redirect_url}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`)
+  }
+  let code = req.query.code 
+  let url =  `https://api.weixin.qq.com/sns/oauth2/access_token?appid=${config.AppId}&secret=${config.AppSecret}&code=${code}&grant_type=authorization_code`
+  let userToken = ''
+  wxRequest.requestApi(url, 'get').then(res => {
+    console.warn(res)
+    res = JSON.parse(res)
+    if (res.access_token) {
+      userToken = res.access_token
+    }
+  })
 })
 module.exports = router;
