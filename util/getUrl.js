@@ -214,8 +214,8 @@ class wxApi {
     let token = await config.readAccessToken()
     let url = weixinUrl + 'customservice/kfaccount/add?access_token=' + token
     let data = {
-      "kf_account": "test1@test",
-      "nickname": "客服1",
+      "kf_account": "test2@test",
+      "nickname": "客服2",
       "password": "pswmd5"
     }
     request({
@@ -227,6 +227,7 @@ class wxApi {
       json: true,
       body: data
     }, (err, res, body) => {
+      console.log(1)
       if (body.errcode === 0) {
         console.warn('增加客服成功')
       } else {
