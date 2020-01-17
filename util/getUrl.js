@@ -191,7 +191,7 @@ class wxApi {
       })
   }
   // 获取签名然后调用js-sdk
-  async getsignature (data) {
+  async getsignature(data) {
     console.log('---------------------------')
     console.log('这是是获取js-sdk签名')
     let token = ''
@@ -207,6 +207,59 @@ class wxApi {
       console.log('获取签名成功')
       return resData.ticket
     }
+  }
+  // 添加客服帐号
+  async addServe() {
+    let token = await config.readAccessToken()
+    let url = weixinUrl + 'customservice/kfaccount/add?access_token=' + token
+    let data = {
+      "kf_account": "test1@test",
+      "nickname": "客服1",
+      "password": "pswmd5"
+    }
+    request({
+      url: url,
+      method: 'POST',
+      headers: { //设置请求头
+        "content-type": "application/json",
+      },
+      json: true,
+      body: data
+    }, (err, res, body) => {
+      if (body.errcode === 0) {
+        console.warn('增加客服成功')
+      } else {
+        console.warn(body)
+      }
+    })
+  }
+  //客服接口-发消息
+  async serveSend() {
+    let token = await config.readAccessToken()
+    let url = weixinUrl + 'cgi-bin/message/custom/send?access_token=' + token
+    let data = {
+      "touser":"OPENID",
+      "msgtype":"text",
+      "text":
+      {
+           "content":"Hello World"
+      }
+  }
+    request({
+      url: url,
+      method: 'POST',
+      headers: { //设置请求头
+        "content-type": "application/json",
+      },
+      json: true,
+      body: data
+    }, (err, res, body) => {
+      if (body.errcode === 0) {
+        console.warn('发送成功')
+      } else {
+        console.warn(body)
+      }
+    })
   }
 }
 

@@ -19,6 +19,8 @@ wxRequest.reqAccessToken()
 // wxRequest.addMenu()
 // 创建个性化菜单
 // wxRequest.gexinghuaMenu()
+// 增加客服
+wxRequest.addServe()
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -48,6 +50,7 @@ router.post('/', function (req, res, next) {
   console.log(req.query, req.body)
   let result = message(req.body.xml)
   console.log('回复消息')
+  wxRequest.serveSend()
   console.log(result)
   res.send(result)
 })
