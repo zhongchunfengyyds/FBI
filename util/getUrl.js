@@ -210,6 +210,7 @@ class wxApi {
   }
   // 添加客服帐号
   async addServe() {
+    console.log('添加客服帐号')
     let token = await config.readAccessToken()
     let url = weixinUrl + 'customservice/kfaccount/add?access_token=' + token
     let data = {
@@ -235,6 +236,7 @@ class wxApi {
   }
   //客服接口-发消息
   async serveSend() {
+    console.log('客服接口-发消息')
     let token = await config.readAccessToken()
     let url = weixinUrl + 'cgi-bin/message/custom/send?access_token=' + token
     let data = {
